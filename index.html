@@ -51,8 +51,7 @@
                         url : 'http://maps.google.com/mapfiles/kml/pushpin/red-pushpin.png'
                     },
                     title : "Marker B"
-                })
-
+                });
                 var distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(markerA.getPosition(),markerB.getPosition());
                 console.log(`distance in meters ${distanceInMeters}`);
                 console.log(`distance in meters ${distanceInMeters * 0.001}`);
