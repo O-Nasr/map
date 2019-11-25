@@ -26,7 +26,11 @@
                 var map = new google.maps.Map(
                     document.getElementById('map'), {zoom: 10, center: uluru});
                 // The marker, positioned at Uluru
-                var marker = new google.maps.Marker({position: uluru, map: map});
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map,
+                    draggable: true,
+                });
             }
         </script>
         <!--Load the API from the specified URL

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;  /* The height is 400 pixels */
+            width: 100%;  /* The width is the width of the web page */
+            background-color: grey;
+        }
+    </style>
+</head>
+<body>
+<h3>My Google Maps</h3>
+<!--The div element for the map -->
+<div id="map"></div>
+<script>
+    // Initialize and add the map
+    var map, markerA, markerB , markers;
+    function initMap() {
+        var aLatLang = { lat: 7.099473939079819, lng: -73.10677064354888 };
+        var bLatLang = { lat: 4.710993389138328, lng: -74.07209873199463 };
+        map =  new google.maps.Map(document.getElementById('map'),{
+            zoom : 7,
+            center :{
+                lat: 6.066385702972249,
+                lng: -74.07493328924413
+            }
+        });
+        markerA = new google.maps.Marker({
+            position : aLatLang ,
+            map : map,
+            icon : {
+                url: 'http://maps.google.com/mapfiles/kml/pushpin/red-pushpin.png'
+            },
+            title : "Marker A",
+            animation: google.maps.Animation.DROP,
+        });
+        markerB = new google.maps.Marker({
+            position :  bLatLang ,
+            map : map,
+            icon : {
+                url : 'http://maps.google.com/mapfiles/kml/pushpin/red-pushpin.png'
+            },
+            title : "Marker B",
+            animation: google.maps.Animation.DROP,
+        });
+
+        var flightPlanCoordinates = [
+            {lat: 7.099473939079819, lng: -73.10677064354888},
+            {lat: 4.710993389138328, lng: -74.07209873199463}
+        ];
+        var flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: '#2d16ff',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        flightPath.setMap(map);
+        var distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(markerA.getPosition(),markerB.getPosition());
+        console.log(`distance in meters ${distanceInMeters}`);
+        console.log(`distance in meters ${distanceInMeters * 0.001}`);
+
+    }//end of the function initMap
+
+
+</script>
+<!--Load the API from the specified URL
+* The async attribute allows the browser to render the page while the API loads
+* The key parameter will contain your own API key (which is not needed for this tutorial)
+* The callback parameter executes the initMap() function
+-->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArWHWrr3k3SY0JVICdTIVUa9XhlZOjD3Q&callback=initMap&libraries=geometry">
+</script>
+</body>
+</html>
